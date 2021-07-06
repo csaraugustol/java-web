@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="css/login_cad_pages.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic.min.css" integrity="sha512-LeCmts7kEi09nKc+DwGJqDV+dNQi/W8/qb0oUSsBLzTYiBwxj0KBlAow2//jV7jwEHwSCPShRN2+IWwWcn1x7Q==" crossorigin="anonymous" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" />
+        <script src="js/modernizr-2.6.2.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="http://jqueryvalidation.org/files/dist/jquery.validate.js"></script>
+        <title> <ui:insert name="title">Adota Pet :: Cadastro</ui:insert></title>
+    </h:head>
+    <body>
+
+        <div class="sidenav">
+            <div class="login-main-text h-50" style="font-size: 1.2em; background-image: url('img/pet.jpg');  background-repeat: no-repeat;">
+
+            </div>
+            <div class="text-left mt-1" id="rodape">
+                <h2>ADOTE<br/> UM PET</h2>
+                <p>Ele está esperando um lar.</p>
+            </div>
+        </div>
+        <div class="main">
+            <div class="col-md-6 col-sm-12">
+                <div class="login-form">
+                    <h:form class="login-form">
+                        
+                        Nome
+                        <h:inputText class="form-control"  value="#{cadMB.user.nome}"/>
+                        <br/>
+                        
+                        Email
+                        <h:inputText class="form-control" value="#{cadMB.user.email}"/>
+                        <br/>
+
+                        Login
+                        <h:inputText class="form-control"  value="#{cadMB.user.login}"/>
+                        <br/>
+
+                        Senha
+                        <h:inputSecret class="form-control"  value="#{cadMB.user.senha}"/>          
+
+                        <br/>
+                        
+<!--                        Confirmar Senha
+                        <h:inputSecret class="form-control"/>          
+
+                        <br/>-->
+                        
+                        #{loginMB.msgErro}
+                        <br/>
+
+                        <h:commandButton value="Cadastrar" 
+                                         class="btn btn-dark " action="#{cadMB.saveUser()}" />
+
+                        <br/>
+                        <br/>
+                        <h:commandLink value="Voltar" class="nav-link" action="#{loginMB.voltar()}">
+                        </h:commandLink>
+                        
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+        <!--        <script>
+        
+                $(document).ready(function(){
+                
+                $("#formCadastroUser").validate({
+                    rules:{
+                        password:{
+                            required: true,
+                            rangelength: [4,10]
+                        },
+                        password2:{
+                            required: true,
+                            equalTo: "#password"
+                        }
+                        
+                    },
+                    messages:{
+                        
+                        password:{
+                            required: "Campo Obrigatório.",
+                            rangelength: "Senha deve ter de 4 a 10 caracteres"
+                        },
+                        password2:{
+                            required: "Campo Obrigatório.",
+                            equalTo: "Senhas não são iguais."
+                        }
+                     
+                    }
+                });
+                
+            });
+            </script>-->
+
+    </body>
+</html>
+

@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+        Cadastro Pet :: Adota Pet
+    </ui:define>
+
+    <ui:define name="body">
+        <h1>Cadastro de Pet</h1>
+
+        <h:messages style="color: red" showDetail="true"/>
+
+        <p:panel header="Pesquisa" rendered="#{cadastraPetMB.status == 'VIEW'}" toggleable="true" closable="true" toggleSpeed="500"
+                 closeSpeed="500" widgetVar="panel">
+
+            <h:form>
+                <h:commandButton class="btn btn-primary mb-3" value="Novo Pet"
+                                 action="#{cadastraPetMB.trocar()}" />
+            </h:form>
+            <p:ajax event="close"  />
+            <p:ajax event="toggle" />
+
+            <h:panelGrid columns="4" class="w-100">
+                Nome Animal:
+                <h:inputText/>
+                Adotante:
+                <h:inputText/>
+
+            </h:panelGrid>
+            <h:panelGrid columns="4" class="w-100">
+                Idade:<br/>
+                de:
+                <h:inputText/>
+                até:
+                <h:inputText/>
+
+            </h:panelGrid>
+            <h:form>
+                <h:commandButton class="btn btn-primary" value="Pesquisar"/>
+            </h:form>
+
+            <p:dataTable class="text-center" var="pet" value="#{cadastraPetMB.listaPet}" rows="5"
+                         paginator="true">
+
+                <p:column headerText="Nome">
+                    <h:outputText value="#{pet.nome}" />
+                </p:column>
+                <p:column headerText="Sexo">
+                    <h:outputText value="#{pet.sexo}" />
+                </p:column>
+                <p:column headerText="Animal">
+                    <h:outputText value="#{pet.tipo}" />
+                </p:column>
+                <p:column headerText="Domesticado">
+                    <h:outputText value="#{pet.ehDomesticado?'Sim':'Não'}" />
+                </p:column>
+                <p:column headerText="Adotante">
+                    <h:outputText value="#{pet.nomeAdotante}" />
+                </p:column>
+                <p:column headerText="Ações">
+                    <h:form>
+                        <h:commandLink value="Alterar" action="#{cadastraPetMB.preparaEdicao(pet.id, pet.tipo)}"/>
+                    </h:form>
+                    <h:form>
+                        <h:commandLink value="Excluir" action="#{cadastraPetMB.excluir(pet.id, pet.tipo)}"/>
+                    </h:form>
+                </p:column>
+
+
+
+
+            </p:dataTable>
+
+
+
+
+
+        </p:panel>
+
+        <h:panelGroup rendered="#{cadastraPetMB.status == 'INSERT' || cadastraPetMB.status == 'EDIT'}">
+
+            <h:form>
+                <h:panelGrid columns="2" class="w-100">
+
+
+                    NOME: <h:inputText value="#{cadastraPetMB.animal.nome}" required="true" requiredMessage="Campo nome não pode ser vazio"/>
+
+                </h:panelGrid>
+
+                <h:panelGrid columns="2" class="w-100">
+
+                    Tipo Animal: <h:selectOneRadio layout="pageDirection" value="#{cadastraPetMB.tipoEscolhido}">
+                        <f:selectItem itemValue="Cachorro" itemLabel="Cachorro"/>
+                        <f:selectItem itemValue="Gato" itemLabel="Gato"/>
+
+                        <f:ajax event="change" rendered="#{cadastraPetMB.mudancaTipoAnimal()}" execute="@this" render="tipoSelec" />
+                    </h:selectOneRadio>
+
+                    <!--                    Sexo Animal: <h:selectOneMenu value="" required="true" requiredMessage="Campo sexo não pode ser vazio">
+                                            <f:selectItem itemValue="" itemLabel="Masculino"/>
+                                            <f:selectItem itemValue="" itemLabel="Feminino"/>-->
+
+                    Sexo Animal: <h:selectOneMenu value="#{cadastraPetMB.animal.sexo}">
+                        <f:selectItems value="#{cadastraPetMB.sexo}" var="s" itemValue="#{s}" itemLabel="#{s}" />
+                    </h:selectOneMenu>
+
+                    <!--                    </h:selectOneMenu>-->
+
+                    Data Nascimento <h:inputText value="#{cadastraPetMB.animal.dataNascimento}"  validator="#{cadastraPetMB.validaDataNasc}"
+                                                 label="Data Nascimento">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:inputText>
+
+                    <h:column/>
+                    <h:column>
+                        <h:selectBooleanCheckbox value="#{cadastraPetMB.animal.ehDomesticado}" />É domesticado
+                        <h:selectBooleanCheckbox value="#{cadastraPetMB.animal.ehVacinado}" />É vacinado
+                        <h:selectBooleanCheckbox  value="#{cadastraPetMB.animal.ehCastrado}" />É castrado
+                    </h:column>
+                    <h:column/>
+
+
+                    <h:panelGroup id="tipoSelec">
+
+                        <!--INÍCIO PANEL CACHORRO-->
+                        <h:column/>
+                        <h:panelGroup rendered="#{cadastraPetMB.tipoEscolhido == 'Cachorro'}">
+                            <H2>Cachorro</H2>
+
+                            Porte: 
+                            <h:selectOneMenu value="#{cadastraPetMB.animal.porte}">
+                                <f:selectItems value="#{cadastraPetMB.porteCachorro}" var="p" itemValue="#{p}" itemLabel="#{p}" />
+                            </h:selectOneMenu>
+
+                            Raça: 
+                            <h:selectOneMenu value="#{cadastraPetMB.animal.racaCachorro}">
+                                <f:selectItems value="#{cadastraPetMB.racaCachorro}" var="r" itemValue="#{r}" itemLabel="#{r}" />
+                            </h:selectOneMenu>
+
+                        </h:panelGroup>
+                        <!--fIM PANEL CACHORRO-->
+
+
+                        <!--INÍCIO PANEL GATO-->
+                        <h:column/>
+                        <h:column/>
+                        <h:panelGroup rendered="#{cadastraPetMB.tipoEscolhido == 'Gato'}">
+                            <H2>Gato</H2>
+
+                            Pelagem: 
+
+                            <h:selectOneMenu  value="#{cadastraPetMB.animal.tipoPelagem}">
+
+                                <f:selectItems value="#{cadastraPetMB.pelagem}" var="d" itemValue="#{d}" itemLabel="#{d}" />
+                            </h:selectOneMenu>
+
+                            Raça: 
+                            <h:selectOneMenu value="#{cadastraPetMB.animal.racaGato}">
+                                <f:selectItems value="#{cadastraPetMB.racaGato}" var="d" itemValue="#{d}" itemLabel="#{d}" />
+                            </h:selectOneMenu>
+
+                        </h:panelGroup>
+                        <!--FIM PANEL GATO-->
+
+                    </h:panelGroup>
+
+
+
+
+                </h:panelGrid>
+
+
+                <h:commandButton class="btn btn-primary" value="Salvar"
+                                 action="#{cadastraPetMB.salvar()}"/>
+            </h:form>
+            <h:form>        
+                <h:commandButton class="mt-5 btn btn-primary" value="Voltar"
+                                 action="#{cadastraPetMB.voltar()}"/>
+            </h:form>
+
+        </h:panelGroup>
+
+    </ui:define>
+
+</ui:composition>

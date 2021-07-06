@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    </head>
+    <body class="bg-info" style="font-size: 1.2em;">
+
+        <div class="container w-50 mt-3">
+            <div class="card">
+                <div class="card-body bg-dark text-center text-light">
+
+                    <form method="GET" action="montagem">
+
+                        <div class="form-group">
+                            <label for="cpNome">Carro</label><br>
+                            <select id="cpNome" name="cpNome">
+                                <option value="Argo">Argo</option>
+                                <option value="Kicks">Kicks</option>
+                                <option value="Toro">Toro</option>
+                            </select>
+                        </div>
+
+                        <div class="bg-danger w-75 container">
+                            <div class="form-group">
+                                <label class="text-dark font-weight-bold" for="cpAr">Ar-Condicionado</label><br>
+                                <label for="sim">Sim</label>
+                                <input type="radio" name="cpAr" id="sim" value="sim">
+                                <label for="nao">Não</label>
+                                <input type="radio" name="cpAr" id="nao" value="nao">
+                            </div>
+                            <div class="form-group">
+                                <label class="text-dark font-weight-bold"  for="cpCambio">Câmbio Automático</label><br>
+                                <label for="sim">Sim</label>
+                                <input type="radio" name="cpCambio" id="sim" value="sim">
+                                <label for="nao">Não</label>
+                                <input type="radio" name="cpCambio" id="nao" value="nao">
+                            </div>
+                            <div class="form-group">
+                                <label class="text-dark font-weight-bold"  for="cpCambio">Vidro Automático</label><br>
+                                <label for="sim">Sim</label>
+                                <input type="radio" name="cpVidro" id="sim" value="sim">
+                                <label for="nao">Não</label>
+                                <input type="radio" name="cpVidro" id="nao" value="nao">
+                            </div>
+                            <div class="form-group">
+                                <label class="text-dark font-weight-bold" for="cpAlarme">Alarme</label><br>
+                                <label for="sim">Sim</label>
+                                <input type="radio" name="cpAlarme" id="sim" value="sim">
+                                <label for="nao">Não</label>
+                                <input type="radio" name="cpAlarme" id="nao" value="nao">
+                            </div>
+                            <div class="form-group">
+                                <label class="text-dark font-weight-bold" for="cpPintura">Pintura</label><br>
+                                <label for="c">Comemorativa</label>
+                                <input type="radio" name="cpPintura" id="c" value="Comemorativa">
+                                <label for="e">Especial</label>
+                                <input type="radio" name="cpPintura" id="e" value="Especial">
+                                <label for="m">Metálica</label>
+                                <input type="radio" name="cpPintura" id="m" value="Metalica">
+                                <label for="m">Padrão</label>
+                                <input type="radio" name="cpPintura" id="m" value="Padrao">
+                            </div>
+                            <div class="form-group">
+                                <label class="text-dark font-weight-bold" for="cpTetoSolar">Teto Solar</label><br>
+                                <label for="sim">Sim</label>
+                                <input type="radio" name="cpTetoSolar" id="sim" value="sim">
+                                <label for="nao">Não</label>
+                                <input type="radio" name="cpTetoSolar" id="nao" value="nao">
+                            </div>
+                            <div class="form-group">
+                                <label class="text-dark font-weight-bold" for="cpMult">Central Multimídia</label><br>
+                                <label for="sim">Sim</label>
+                                <input type="radio" name="cpMult" id="sim" value="sim">
+                                <label for="nao">Não</label>
+                                <input type="radio" name="cpMult" id="nao" value="nao">
+                            </div>
+                            <div class="form-group">
+                                <label class="text-dark font-weight-bold" for="cpMult">Motor</label><br>
+                                <label for="1_0">1.0</label>
+                                <input type="radio" name="cpMotor" id="1_0" value="1.0">
+                                <label for="1_5">1.5</label>
+                                <input type="radio" name="cpMotor" id="1_5" value="1.5">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input class="btn btn-warning" type="submit" value="Montar Carro" style="cursor: pointer">
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    </body>
+</html>
